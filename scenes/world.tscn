@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b03r51md50k6u"]
+
+[ext_resource type="PackedScene" uid="uid://khys45srbd3r" path="res://scenes/map.tscn" id="1_m7m6p"]
+
+[node name="World" type="Node2D"]
+
+[node name="Map" parent="." instance=ExtResource("1_m7m6p")]
+
+[node name="Spawn" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="Spawn"]

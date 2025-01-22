@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://42lhuy2a5o3w"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_r84eb"]
+[ext_resource type="Texture2D" uid="uid://hn1rp88mxntl" path="res://assets/sprites/knight.png" id="2_uvovc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xv7or"]
+atlas = ExtResource("2_uvovc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rac2p"]
+atlas = ExtResource("2_uvovc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ht3jl"]
+atlas = ExtResource("2_uvovc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbsax"]
+atlas = ExtResource("2_uvovc")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0pql5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xv7or")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rac2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ht3jl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mbsax")
+}],
+"loop": true,
+"name": &" idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dsi6c"]
+radius = 5.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_brw7x"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 2
+script = ExtResource("1_r84eb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_0pql5")
+animation = &" idle"
+autoplay = " idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_dsi6c")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_brw7x")
